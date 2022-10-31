@@ -36,7 +36,6 @@ SOFTWARE.
 - Algorand javascript sdk
 - Pyteal
 - Github page
--
 
 ## Project Description
 

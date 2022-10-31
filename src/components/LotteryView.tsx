@@ -9,24 +9,28 @@ export const LotteryView = () => {
   const arbitraryAccount = getParticipantAddresses()[0].mmemonic;
   const algoAccount = mnemonicToSecretKey(arbitraryAccount);
   const startLottery = async () => {
-    callContractByName(algoAccount, "startLottery", []).catch((error) => {
-      alert("Lottery Failed to start!");
-      console.log(error);
-    });
+    callContractByName(algoAccount, "startLottery", [])
+      .then(() => alert("Lottery started!"))
+      .catch((error) => {
+        alert("Lottery Failed to start!");
+        console.log(error);
+      });
   };
   const resetLottery = async () => {
-    callContractByName(algoAccount, "resetLottery", []).catch((error) => {
-      alert("Lottery Failed to reset!");
-      console.log(error);
-    });
+    callContractByName(algoAccount, "resetLottery", [])
+      .then(() => alert("Lottery reset!"))
+      .catch((error) => {
+        alert("Lottery Failed to reset!");
+        console.log(error);
+      });
   };
   const resolveLottery = async () => {
-    callContractByName(algoAccount, "resolveLottery", [
-      RANDOM_CONTRACT_ID,
-    ]).catch((error) => {
-      alert("Lottery Failed to resolve!");
-      console.log(error);
-    });
+    callContractByName(algoAccount, "resolveLottery", [RANDOM_CONTRACT_ID])
+      .then(() => alert("Lottery resolved!"))
+      .catch((error) => {
+        alert("Lottery Failed to resolve!");
+        console.log(error);
+      });
   };
   const participants = getParticipantAddresses().map((account, index) => (
     <Participant account={account} key={index} />

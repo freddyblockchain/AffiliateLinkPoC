@@ -29,6 +29,7 @@ export const Participant = (props: ParticipantProps) => {
         getParticipantRound(algoAccount).then((num) => {
           setParticipantRound(num + 7);
         });
+        alert("Sucessfully participated");
       })
       .catch((error) => {
         console.log(error);
