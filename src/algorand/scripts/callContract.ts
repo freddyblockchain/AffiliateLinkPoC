@@ -25,7 +25,7 @@ export const callContractByName = async (
 ) => {
   console.log("trying to call : " + name);
   console.log("trying to get abi method from json file");
-  const startLottery = getMethodByName(name);
+  const method = getMethodByName(name);
 
   const sp = await algodClient.getTransactionParams().do();
   const commonParams = {
@@ -39,7 +39,7 @@ export const callContractByName = async (
 
   const comp = new AtomicTransactionComposer();
   comp.addMethodCall({
-    method: startLottery,
+    method: method,
     methodArgs: params,
     ...commonParams,
   });

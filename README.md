@@ -54,8 +54,7 @@ Each lottery can be reset after a set number of rounds, to account for a partici
 ## Project Architecture
 
 The project is composed of a smart contract, that has the lottery logic, and a front end application, that simulates
-a lottery. The randomness used in the smart contract is retrieved from the randomness smart contract, currently living
-on the testnet (App id : 110096026).
+a lottery. The randomness used in the smart contract is retrieved from the randomness smart contract, described in this article: https://developer.algorand.org/articles/usage-and-best-practices-for-randomness-beacon/
 
 ## How to use
 
