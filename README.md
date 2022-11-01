@@ -72,6 +72,8 @@ This happens if the lottery is in a state, that does not allow the pressed actio
 
 ## Demo
 
+https://www.youtube.com/watch?v=PntwdY-UcME&ab_channel=FrederikNielsen
+
 ## Roadmap
 
 - Create off-chain lookup table, that could automate the process of sending the NFT to the winner.
