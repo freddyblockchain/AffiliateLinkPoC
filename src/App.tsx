@@ -8,19 +8,20 @@ import {
   Grid,
   theme,
 } from "@chakra-ui/react";
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { LotteryView } from "./components/LotteryView";
-import { OngoingView } from "./components/OngoingView";
-import { WinnerView } from "./components/WinnerView";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { FrontPage } from "./pages/FrontPage";
+import { SignupPage } from "./pages/SignupPage";
 
 export const App = () => (
   <ChakraProvider theme={theme}>
     <Box fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <VStack spacing={4}>
-          <LotteryView />
-          <WinnerView />
-        </VStack>
+      <Grid minH="100vh">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<FrontPage />}></Route>
+            <Route path="/signup" element={<SignupPage />}></Route>
+          </Routes>
+        </BrowserRouter>
       </Grid>
     </Box>
   </ChakraProvider>
