@@ -1,7 +1,7 @@
 const personSigningUpWallet = {
-  address: "SYPBOC5NTOIU3XRJ4HEYOI55NUYD3IPTTW5XYXBSPKAIHLJSNNV2ASH67A",
+  address: "RQX6JUHQRR4X7442D7DQPWPFL2JGSX6KX3EXTIXLCPMJ7EZQLBAN5KQFIY",
   mmemonic:
-    "topple cruel neutral rose glory glad prevent output box snap notice child actor poem forget ship luxury vanish tank mention cloth rally sheriff abstract alert",
+    "glance fame avocado team tobacco spoon actress author situate swarm embark check design reform radio alien bachelor matter best diesel whip select idle absorb film",
 };
 
 const personGeneratingLinkWallet = {
