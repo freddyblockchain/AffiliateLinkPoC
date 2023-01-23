@@ -1,29 +1,49 @@
 import { PeraWalletConnect } from "@perawallet/connect";
-import { Box, Button, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  Link,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
+export const peraWallet = new PeraWalletConnect({
+  shouldShowSignTxnToast: true,
+  network: "testnet",
+  chainId: 416002,
+});
+
 export const SignupPage = () => {
-  const peraWallet = new PeraWalletConnect({
-    shouldShowSignTxnToast: true,
-    network: "testnet",
-    chainId: 416002,
-  });
   const [accountAddress, setAccountAddress] = useState("");
   // Check app is connected with Pera Wallet
   const isConnectedToPeraWallet = accountAddress !== "";
   return (
-    <Button
-      onClick={
-        isConnectedToPeraWallet
-          ? handleDisconnectWalletClick
-          : handleConnectWalletClick
-      }
-    >
-      {isConnectedToPeraWallet ? "Disconnect" : "Connect to Pera Wallet"}
-    </Button>
+    <Center>
+      <VStack>
+        <Heading> Signup page!</Heading>
+        <Button
+          onClick={
+            isConnectedToPeraWallet
+              ? handleDisconnectWalletClick
+              : handleConnectWalletClick
+          }
+        >
+          {isConnectedToPeraWallet ? "Disconnect" : "Connect to Pera Wallet"}
+        </Button>
+        {isConnectedToPeraWallet ? (
+          <Button>
+            <Link href={`payment`} color="teal.500">
+              Go to PaymentPage
+            </Link>
+          </Button>
+        ) : null}
+      </VStack>
+    </Center>
   );
   function handleConnectWalletClick() {
-    alert("hello");
     peraWallet
       .connect()
       .then((newAccounts) => {

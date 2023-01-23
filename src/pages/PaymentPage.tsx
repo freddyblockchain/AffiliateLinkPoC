@@ -9,21 +9,18 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { personGeneratingLinkWallet } from "../wallets";
+import { peraWallet } from "./SignupPage";
 
-export const FrontPage = () => {
-  const link = "signup";
+export const PaymentPage = () => {
   const param = `?generatorWallet=${personGeneratingLinkWallet.address}`;
   const [isVisible, setVisible] = useState(false);
+  peraWallet.reconnectSession();
   return (
     <Center>
       <VStack>
-        <Heading>Generate Link Page!</Heading>
-        <Button onClick={() => setVisible(true)}>Generate Link</Button>
-        {isVisible ? (
-          <Link href={`signup${param}`} color="teal.500">
-            localhost:3000/signup{param}
-          </Link>
-        ) : null}
+        <Heading>Payment Page!</Heading>
+        <Text> Connected Wallet: {peraWallet.connector?.accounts[0]}</Text>
+        <Button>Pay 1 algo</Button>
       </VStack>
     </Center>
   );
