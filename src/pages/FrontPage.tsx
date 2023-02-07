@@ -8,11 +8,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { personGeneratingLinkWallet } from "../wallets";
+import { affiliateAddress } from "../algorand/algoClient";
 
 export const FrontPage = () => {
   const link = "signup";
-  const param = `?generatorWallet=${personGeneratingLinkWallet.address}`;
+  const param = `?generatorWallet=${affiliateAddress}`;
   const [isVisible, setVisible] = useState(false);
   return (
     <Center>

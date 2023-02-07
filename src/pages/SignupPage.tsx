@@ -9,10 +9,10 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { signup } from "../algorand/contracts/signup";
 
 export const peraWallet = new PeraWalletConnect({
   shouldShowSignTxnToast: true,
-  network: "testnet",
   chainId: 416002,
 });
 
@@ -44,6 +44,8 @@ export const SignupPage = () => {
     </Center>
   );
   function handleConnectWalletClick() {
+    const queryString = window.location.search;
+    const affiliateAddress = queryString.split("=")[1];
     peraWallet
       .connect()
       .then((newAccounts) => {
@@ -51,6 +53,12 @@ export const SignupPage = () => {
         peraWallet.connector?.on("disconnect", handleDisconnectWalletClick);
 
         setAccountAddress(newAccounts[0]);
+
+        signup(newAccounts[0], affiliateAddress).then(() => {
+          console.log("successfully signed up");
+        });
+        console.log(newAccounts[0]);
+        console.log(affiliateAddress);
       })
       .catch((error) => {
         // You MUST handle the reject because once the user closes the modal, peraWallet.connect() promise will be rejected.

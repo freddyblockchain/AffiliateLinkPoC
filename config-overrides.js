@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 module.exports = function override(config, env) {
   console.log("override");
   let loaders = config.resolve;
@@ -7,7 +9,15 @@ module.exports = function override(config, env) {
     stream: require.resolve("stream-browserify"),
     os: require.resolve("os-browserify"),
     crypto: require.resolve("crypto-browserify"),
+    util: require.resolve("util"),
   };
+
+  config.plugins = [
+    ...config.plugins,
+    new webpack.ProvidePlugin({
+      Buffer: ["buffer", "Buffer"],
+    }),
+  ];
 
   return config;
 };
