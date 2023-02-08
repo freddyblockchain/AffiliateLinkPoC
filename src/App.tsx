@@ -17,7 +17,7 @@ export const App = () => (
   <ChakraProvider theme={theme}>
     <Box fontSize="xl">
       <Grid minH="100vh">
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path="/" element={<FrontPage />}></Route>
             <Route path="/signup" element={<SignupPage />}></Route>
