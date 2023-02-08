@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/AffiliateLinkPoC/static/js/main.9bb12f60.js",
+    "main.js": "/AffiliateLinkPoC/static/js/main.0b9a35d8.js",
     "index.html": "/AffiliateLinkPoC/index.html",
-    "main.9bb12f60.js.map": "/AffiliateLinkPoC/static/js/main.9bb12f60.js.map"
+    "main.0b9a35d8.js.map": "/AffiliateLinkPoC/static/js/main.0b9a35d8.js.map"
   },
   "entrypoints": [
-    "static/js/main.9bb12f60.js"
+    "static/js/main.0b9a35d8.js"
   ]
 }
