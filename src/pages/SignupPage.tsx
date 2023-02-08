@@ -3,13 +3,14 @@ import {
   Button,
   Center,
   Heading,
-  Link,
+  Link as ChakraLink,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { signup } from "../algorand/contracts/signup";
 import MyAlgoConnect from "@randlabs/myalgo-connect";
+import { Link } from "react-router-dom";
 
 const myAlgoConnect = new MyAlgoConnect();
 
@@ -26,9 +27,11 @@ export const SignupPage = () => {
         </Button>
         {accountAddress !== "" ? (
           <Button>
-            <Link href={`payment`} color="teal.500">
-              Go to PaymentPage
-            </Link>
+            <ChakraLink>
+              <Link to={`/payment`} color="teal.500">
+                Go to PaymentPage
+              </Link>
+            </ChakraLink>
           </Button>
         ) : null}
       </VStack>

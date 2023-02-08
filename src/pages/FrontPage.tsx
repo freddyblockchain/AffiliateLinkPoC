@@ -3,15 +3,15 @@ import {
   Button,
   Center,
   Heading,
-  Link,
   Text,
   VStack,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { affiliateAddress } from "../algorand/algoClient";
 
 export const FrontPage = () => {
-  const link = "signup";
   const param = `?generatorWallet=${affiliateAddress}`;
   const [isVisible, setVisible] = useState(false);
   return (
@@ -20,9 +20,11 @@ export const FrontPage = () => {
         <Heading>Generate Link Page!</Heading>
         <Button onClick={() => setVisible(true)}>Generate Link</Button>
         {isVisible ? (
-          <Link href={`signup${param}`} color="teal.500">
-            localhost:3000/signup{param}
-          </Link>
+          <ChakraLink>
+            <Link to={`/signup${param}`} color="teal.500">
+              localhost:3000/signup{param}
+            </Link>
+          </ChakraLink>
         ) : null}
       </VStack>
     </Center>
