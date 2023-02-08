@@ -19,6 +19,9 @@ export const platformMmonic =
 export const dummyAccountMmonic =
   "topple cruel neutral rose glory glad prevent output box snap notice child actor poem forget ship luxury vanish tank mention cloth rally sheriff abstract alert";
 
+export const applicationAddress =
+  "S3UO5OUYENPUNMJUJLVYBZ4SAVH6UOFK24YBTJUKFOSIRBYJUM42BRQMZU";
+
 export const getMethodByName = (name: string) => {
   const contract = new ABIContract(affiliate_contract);
 

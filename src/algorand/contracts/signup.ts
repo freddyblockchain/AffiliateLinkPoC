@@ -39,7 +39,6 @@ export async function signup(user: string, affiliate: string) {
     ],
     ...commonParams,
   });
-  //const result = await atc.execute(algodClient, 5);
-  console.log("done");
-  return atc.buildGroup();
+  atc.buildGroup();
+  const result = await atc.execute(algodClient, 5);
 }

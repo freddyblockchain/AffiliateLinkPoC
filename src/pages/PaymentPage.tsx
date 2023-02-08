@@ -13,47 +13,62 @@ import { peraWallet } from "./SignupPage";
 import algosdk, { decodeAddress, encodeAddress } from "algosdk";
 import { transactions_to_sign } from "../algorand/contracts/transaction";
 import { signup } from "../algorand/contracts/signup";
+import MyAlgoConnect from "@randlabs/myalgo-connect";
 
 export const PaymentPage = () => {
   const param = `?generatorWallet=${affiliateAddress}`;
   const [isVisible, setVisible] = useState(false);
+  const [accountAddress, setAccountAddress] = useState("");
+  const myAlgoConnect = new MyAlgoConnect();
   peraWallet.reconnectSession();
   return (
     <Center>
       <VStack>
         <Heading>Payment Page!</Heading>
-        <Text> Connected Wallet: {peraWallet.connector?.accounts[0]}</Text>
-        <Button onClick={handleAffiliateTransaction}>
-          Pay 5 algo affiliate fee
-        </Button>
+        {accountAddress === "" ? (
+          <Button onClick={async () => await handleConnectWalletClick()}>
+            Connect to my algo wallet
+          </Button>
+        ) : null}
+        <Text> Connected Wallet: {accountAddress} </Text>
+
+        {accountAddress !== "" ? (
+          <Button onClick={handleAffiliateTransaction}>
+            Pay 5 algo affiliate fee
+          </Button>
+        ) : null}
       </VStack>
     </Center>
   );
-};
 
-async function handleAffiliateTransaction() {
-  const user = peraWallet.connector?.accounts[0];
-
-  const userDecoded = decodeAddress(user!);
-  const affiliateBox = await algodClient
-    .getApplicationBoxByName(APP_ID, userDecoded.publicKey)
-    .do();
-
-  const affiliateAddress = encodeAddress(affiliateBox.value);
-
-  const txnSigners = await signup(user!, affiliateAddress);
-
-  const txnGroup = [{ txn: txnSigners[0].txn, signers: [user!] }];
-
-  try {
+  async function handleAffiliateTransaction() {
     console.log("here");
-    console.log(user!);
-    console.log(txnGroup[0].txn.amount);
-    const signedTxns = await peraWallet.signTransaction([txnGroup]);
-    const { txId } = await algodClient.sendRawTransaction(signedTxns).do();
+    const user = accountAddress;
 
-    console.log("txnId :" + txId);
-  } catch (error) {
-    console.log("Couldn't sign Opt-in txns", error);
+    const userDecoded = decodeAddress(user!);
+    const affiliateBox = await algodClient
+      .getApplicationBoxByName(APP_ID, userDecoded.publicKey)
+      .do();
+
+    const affiliateAddress = encodeAddress(affiliateBox.value);
+
+    const txnSigners = transactions_to_sign(
+      accountAddress,
+      affiliateAddress
+    ).then(() => {
+      alert("successfully made affiliate transaction!");
+    });
   }
-}
+
+  function handleConnectWalletClick() {
+    console.log("here!");
+    myAlgoConnect
+      .connect()
+      .then((newAccounts) => {
+        setAccountAddress(newAccounts[0].address);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+};

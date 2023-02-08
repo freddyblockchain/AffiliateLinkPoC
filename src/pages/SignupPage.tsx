@@ -10,30 +10,27 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { signup } from "../algorand/contracts/signup";
+import MyAlgoConnect from "@randlabs/myalgo-connect";
 
 export const peraWallet = new PeraWalletConnect({
   shouldShowSignTxnToast: true,
   chainId: 416002,
 });
 
+const myAlgoConnect = new MyAlgoConnect();
+
 export const SignupPage = () => {
   const [accountAddress, setAccountAddress] = useState("");
   // Check app is connected with Pera Wallet
-  const isConnectedToPeraWallet = accountAddress !== "";
+  let isConnectedToMyAlgoWallet = false;
   return (
     <Center>
       <VStack>
         <Heading> Signup page!</Heading>
-        <Button
-          onClick={
-            isConnectedToPeraWallet
-              ? handleDisconnectWalletClick
-              : handleConnectWalletClick
-          }
-        >
-          {isConnectedToPeraWallet ? "Disconnect" : "Connect to Pera Wallet"}
+        <Button onClick={async () => await handleConnectWalletClick()}>
+          Connect to my algo wallet
         </Button>
-        {isConnectedToPeraWallet ? (
+        {accountAddress !== "" ? (
           <Button>
             <Link href={`payment`} color="teal.500">
               Go to PaymentPage
@@ -46,19 +43,16 @@ export const SignupPage = () => {
   function handleConnectWalletClick() {
     const queryString = window.location.search;
     const affiliateAddress = queryString.split("=")[1];
-    peraWallet
+    myAlgoConnect
       .connect()
       .then((newAccounts) => {
-        // Setup the disconnect event listener
-        peraWallet.connector?.on("disconnect", handleDisconnectWalletClick);
-
-        setAccountAddress(newAccounts[0]);
-
-        signup(newAccounts[0], affiliateAddress).then(() => {
+        signup(newAccounts[0].address, affiliateAddress).then(() => {
           console.log("successfully signed up");
         });
+        console.log("here!" + newAccounts[0].address);
         console.log(newAccounts[0]);
         console.log(affiliateAddress);
+        setAccountAddress(newAccounts[0].address);
       })
       .catch((error) => {
         // You MUST handle the reject because once the user closes the modal, peraWallet.connect() promise will be rejected.
@@ -67,9 +61,5 @@ export const SignupPage = () => {
           // log the necessary errors
         }
       });
-  }
-  function handleDisconnectWalletClick() {
-    peraWallet.disconnect();
-    setAccountAddress("");
   }
 };
