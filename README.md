@@ -63,12 +63,12 @@ The platform can set the Affiliates's commission.
 
 # Technology used
 
--React
--Pyteal/Beaker
--algosdk (algorand javascript sdk)
--purestake
--Chakra ui
--Github pages
+- React
+- Pyteal/Beaker
+- algosdk (algorand javascript sdk)
+- purestake
+- Chakra ui
+- Github pages
 
 # Roadmap
 
