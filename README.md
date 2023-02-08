@@ -51,5 +51,7 @@ Integrate into Algorand projects and offer new Affiliate compensation schemes.
 
 https://www.loom.com/share/68ac163985f64eca8831b43dd39d15c1
 
-The smart contract is located in AffiliateLinkPoC/src/algorand/contracts/beakerContract.py.
+- The smart contract is located in AffiliateLinkPoC/src/algorand/contracts/beakerContract.py.
+- The smart contract lives on the testnet, and the app-id is : 157625321
+
 Linkbox can be easily integrated into a platform's existing smart contracts via a group transaction that handles the payment.
