@@ -22,9 +22,11 @@ export const SignupPage = () => {
     <Center>
       <VStack>
         <Heading> Signup page!</Heading>
-        <Button onClick={async () => await handleConnectWalletClick()}>
-          Connect to wallet and sign up
-        </Button>
+        {accountAddress === "" ? (
+          <Button onClick={async () => handleConnectWalletClick()}>
+            Connect to wallet and sign up
+          </Button>
+        ) : null}
         {accountAddress !== "" ? (
           <Button>
             <ChakraLink>
@@ -38,7 +40,7 @@ export const SignupPage = () => {
     </Center>
   );
   function handleConnectWalletClick() {
-    const queryString = window.location.search;
+    const queryString = window.location.hash.substring(1);
     const affiliateAddress = queryString.split("=")[1];
     myAlgoConnect
       .connect()
@@ -46,10 +48,13 @@ export const SignupPage = () => {
         signup(newAccounts[0].address, affiliateAddress).then(() => {
           alert("successfully signed up");
         });
+        console.log("query string is: " + queryString);
+        console.log("address is: " + newAccounts[0].address);
+        console.log("affiliate is: " + affiliateAddress);
         setAccountAddress(newAccounts[0].address);
       })
       .catch((error) => {
-        console.log("error");
+        console.log("error" + error);
       });
   }
 };
