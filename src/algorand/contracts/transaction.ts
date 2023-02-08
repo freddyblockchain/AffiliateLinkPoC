@@ -34,16 +34,11 @@ export async function transactions_to_sign(user: string, affiliate: string) {
       }),
       signer: signer,
     };
-    console.log("here2");
     const commonParams = {
       appID: APP_ID,
       sender: user,
       suggestedParams: sp,
     };
-
-    console.log(user);
-    console.log(affiliate);
-    console.log(creatorAddress);
     atc.addMethodCall({
       method: methodName,
       methodArgs: [txn2, affiliate, creatorAddress],
@@ -54,10 +49,8 @@ export async function transactions_to_sign(user: string, affiliate: string) {
       ...commonParams,
       signer: signer,
     });
-    console.log("in here before build");
 
     const group = atc.buildGroup();
-    console.log("about to execute");
     await atc.execute(algodClient, 2);
   } catch (error) {
     console.log("error " + error);

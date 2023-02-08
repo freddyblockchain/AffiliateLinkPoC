@@ -1,4 +1,3 @@
-import { PeraWalletConnect } from "@perawallet/connect";
 import {
   Box,
   Button,
@@ -12,11 +11,6 @@ import { useState } from "react";
 import { signup } from "../algorand/contracts/signup";
 import MyAlgoConnect from "@randlabs/myalgo-connect";
 
-export const peraWallet = new PeraWalletConnect({
-  shouldShowSignTxnToast: true,
-  chainId: 416002,
-});
-
 const myAlgoConnect = new MyAlgoConnect();
 
 export const SignupPage = () => {
@@ -28,7 +22,7 @@ export const SignupPage = () => {
       <VStack>
         <Heading> Signup page!</Heading>
         <Button onClick={async () => await handleConnectWalletClick()}>
-          Connect to my algo wallet
+          Connect to wallet and sign up
         </Button>
         {accountAddress !== "" ? (
           <Button>
@@ -47,19 +41,12 @@ export const SignupPage = () => {
       .connect()
       .then((newAccounts) => {
         signup(newAccounts[0].address, affiliateAddress).then(() => {
-          console.log("successfully signed up");
+          alert("successfully signed up");
         });
-        console.log("here!" + newAccounts[0].address);
-        console.log(newAccounts[0]);
-        console.log(affiliateAddress);
         setAccountAddress(newAccounts[0].address);
       })
       .catch((error) => {
-        // You MUST handle the reject because once the user closes the modal, peraWallet.connect() promise will be rejected.
-        // For the async/await syntax you MUST use try/catch
-        if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
-          // log the necessary errors
-        }
+        console.log("error");
       });
   }
 };
